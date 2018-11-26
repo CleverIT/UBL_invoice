@@ -13,27 +13,27 @@ use Sabre\Xml\Writer;
 use Sabre\Xml\XmlSerializable;
 
 class TaxScheme implements XmlSerializable {
-	private $id;
+    private $id;
 
-	/**
-	 * @return mixed
-	 */
-	public function getId() {
-		return $this->id;
-	}
+    /**
+     * @return mixed
+     */
+    public function getId() {
+        return $this->id;
+    }
 
-	/**
-	 * @param mixed $id
-	 * @return int
-	 */
-	public function setId($id) {
-		$this->id = $id;
-		return $this;
-	}
+    /**
+     * @param mixed $id
+     * @return TaxScheme
+     */
+    public function setId($id) {
+        $this->id = $id;
+        return $this;
+    }
 
-	function xmlSerialize(Writer $writer) {
-		$writer->write([
-			Schema::CAC.'ID' => $this->id
-		]);
-	}
+    function xmlSerialize(Writer $writer) {
+        $writer->write([
+            Schema::CBC.'ID' => $this->id
+        ]);
+    }
 }

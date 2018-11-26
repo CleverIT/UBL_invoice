@@ -33,6 +33,12 @@ class Invoice implements XmlSerializable{
      */
 
     private $invoiceTypeCode;
+
+    /**
+     * @var AdditionalDocumentReference
+     */
+    private $additionalDocumentReference;
+
     /**
      * @var Party
      */
@@ -108,6 +114,7 @@ class Invoice implements XmlSerializable{
             $cbc . 'CopyIndicator' => $this->copyIndicator ? 'true' : 'false',
             $cbc . 'IssueDate' => $this->issueDate->format('Y-m-d'),
             $cbc . 'InvoiceTypeCode' => $this->invoiceTypeCode,
+            $cac . 'AdditionalDocumentReference' => $this->additionalDocumentReference,
             $cac . 'AccountingSupplierParty' => [$cac . "Party" => $this->accountingSupplierParty],
             $cac . 'AccountingCustomerParty' => [$cac . "Party" => $this->accountingCustomerParty],
         ]);
@@ -199,6 +206,22 @@ class Invoice implements XmlSerializable{
      */
     public function setInvoiceTypeCode($invoiceTypeCode) {
         $this->invoiceTypeCode = $invoiceTypeCode;
+        return $this;
+    }
+
+    /**
+     * @return AdditionalDocumentReference
+     */
+    public function getAdditionalDocumentReference() {
+        return $this->additionalDocumentReference;
+    }
+
+    /**
+     * @param AdditionalDocumentReference $additionalDocumentReference
+     * @return Invoice
+     */
+    public function setAdditionalDocumentReference($additionalDocumentReference) {
+        $this->additionalDocumentReference = $additionalDocumentReference;
         return $this;
     }
 
