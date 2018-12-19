@@ -1,0 +1,18 @@
+language: php
+
+php:
+  - 7.1
+  - 7.2
+  - 7.3
+
+sudo: false
+
+cache:
+  directories:
+    - $HOME/.composer/cache
+
+install:
+  - composer update --prefer-dist --no-interaction --prefer-stable
+
+script:
+  - vendor/bin/phpunit

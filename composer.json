@@ -23,6 +23,15 @@
         "psr-4": {
             "CleverIt\\UBL\\Invoice\\": ["src/", "src/classes"]
         }
-    }
+    },
 
+    "require-dev": {
+        "phpunit/phpunit": "^7.5"
+    },
+
+    "autoload-dev": {
+        "psr-4": {
+            "CleverIt\\UBL\\Invoice\\Tests\\": "tests/"
+        }
+    }
 }
