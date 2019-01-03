@@ -4,15 +4,22 @@
  * http://www.oioubl.net/validator/
  */
 
-namespace CleverIt\UBL\Invoice;
 
-use \DateTime as DateTime;
+use CleverIt\UBL\Invoice\Invoice;
+use CleverIt\UBL\Invoice\Generator;
+use CleverIt\UBL\Invoice\LegalMonetaryTotal;
+use CleverIt\UBL\Invoice\TaxSubTotal;
+use CleverIt\UBL\Invoice\Address;
+use CleverIt\UBL\Invoice\Country;
+use CleverIt\UBL\Invoice\Party;
+use CleverIt\UBL\Invoice\Item;
+use CleverIt\UBL\Invoice\Price;
+use CleverIt\UBL\Invoice\InvoiceLine;
+use CleverIt\UBL\Invoice\TaxScheme;
+use CleverIt\UBL\Invoice\TaxTotal;
+use CleverIt\UBL\Invoice\TaxCategory;
 
-include '../vendor/autoload.php';
-
-require 'classes/Invoice.php';
-require 'Generator.php';
-
+require_once  __DIR__ . '/../vendor/autoload.php';
 
 $generator          = new Generator();
 $legalMonetaryTotal = new LegalMonetaryTotal();
@@ -79,7 +86,7 @@ $taxTotal->setTaxAmount($taxSubTotal->getTaxAmount());
 // invoice
 $invoice = new Invoice();
 $invoice->setId(3);
-$invoice->setIssueDate(new DateTime());
+$invoice->setIssueDate(new \DateTime());
 $invoice->setInvoiceTypeCode('invoiceTypeCode');
 $invoice->setAccountingSupplierParty($company);
 $invoice->setAccountingCustomerParty($client);
