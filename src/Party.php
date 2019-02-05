@@ -163,7 +163,7 @@ class Party implements XmlSerializable{
 		    $writer->write([
 			    Schema::CAC.'PartyTaxScheme' => [
 				    Schema::CBC.'CompanyID' => $this->companyId,
-				    Schema::CAC.'TaxScheme' => [Schema::CAC.'ID' => $this->taxScheme]
+                    Schema::CAC.'TaxScheme' => $this->taxScheme
 			    ],
 		    ]);
 	    }
