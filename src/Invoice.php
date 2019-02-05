@@ -13,7 +13,7 @@ use Sabre\Xml\Writer;
 use Sabre\Xml\XmlSerializable;
 
 class Invoice implements XmlSerializable{
-    private $UBLVersionID = '2.0';
+    private $UBLVersionID = '2.1';
 
     /**
      * @var int
