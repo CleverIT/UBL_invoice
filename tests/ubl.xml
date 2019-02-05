@@ -2,7 +2,7 @@
 <Invoice xmlns="urn:oasis:names:specification:ubl:schema:xsd:Invoice-2"
          xmlns:cbc="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2"
          xmlns:cac="urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2">
-    <cbc:UBLVersionID>2.1</cbc:UBLVersionID>
+    <cbc:UBLVersionID>2.2</cbc:UBLVersionID>
     <cbc:CustomizationID>OIOUBL-2.01</cbc:CustomizationID>
     <cbc:ID>CIT1234</cbc:ID>
     <cbc:CopyIndicator>false</cbc:CopyIndicator>
