@@ -41,7 +41,7 @@ class AdditionalDocumentReference implements XmlSerializable {
     }
 
     /**
-     * @param mixed $id
+     * @param $attachment
      * @return AdditionalDocumentReference
      */
     public function setAttachment($attachment) {
@@ -57,7 +57,7 @@ class AdditionalDocumentReference implements XmlSerializable {
     }
 
     /**
-     * @param mixed $id
+     * @param $filename
      * @return AdditionalDocumentReference
      */
     public function setFilename($filename) {
