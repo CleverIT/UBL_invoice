@@ -102,22 +102,24 @@ class Invoice implements XmlSerializable{
 
     function xmlSerialize(Writer $writer)
     {
-        $cbc = '{urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2}';
-        $cac = '{urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2}';
-
         $this->validate();
 
         $writer->write([
-            $cbc . 'UBLVersionID' => $this->UBLVersionID,
-            $cbc . 'CustomizationID' => 'OIOUBL-2.01',
-            $cbc . 'ID' => $this->id,
-            $cbc . 'CopyIndicator' => $this->copyIndicator ? 'true' : 'false',
-            $cbc . 'IssueDate' => $this->issueDate->format('Y-m-d'),
-            $cbc . 'InvoiceTypeCode' => $this->invoiceTypeCode,
-            $cac . 'AdditionalDocumentReference' => $this->additionalDocumentReference,
-            $cac . 'AccountingSupplierParty' => [$cac . "Party" => $this->accountingSupplierParty],
-            $cac . 'AccountingCustomerParty' => [$cac . "Party" => $this->accountingCustomerParty],
+            Schema::CBC . 'UBLVersionID' => $this->UBLVersionID,
+            Schema::CBC . 'CustomizationID' => 'OIOUBL-2.01',
+            Schema::CBC . 'ID' => $this->id,
+            Schema::CBC . 'CopyIndicator' => $this->copyIndicator ? 'true' : 'false',
+            Schema::CBC . 'IssueDate' => $this->issueDate->format('Y-m-d'),
+            Schema::CBC . 'InvoiceTypeCode' => $this->invoiceTypeCode,
+            Schema::CAC . 'AccountingSupplierParty' => [Schema::CAC . "Party" => $this->accountingSupplierParty],
+            Schema::CAC . 'AccountingCustomerParty' => [Schema::CAC . "Party" => $this->accountingCustomerParty],
         ]);
+
+        if($this->additionalDocumentReference!= null){
+            $writer->write([
+                Schema::CAC . 'AdditionalDocumentReference' => $this->additionalDocumentReference,
+            ]);
+        }
 
         if ($this->allowanceCharges != null) {
             foreach ($this->allowanceCharges as $invoiceLine) {
@@ -134,7 +136,7 @@ class Invoice implements XmlSerializable{
         }
 
         $writer->write([
-            $cac . 'LegalMonetaryTotal' => $this->legalMonetaryTotal
+            Schema::CAC . 'LegalMonetaryTotal' => $this->legalMonetaryTotal
         ]);
 
         foreach ($this->invoiceLines as $invoiceLine) {

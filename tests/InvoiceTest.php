@@ -2,12 +2,14 @@
 
 namespace CleverIt\UBL\Invoice\Tests;
 
+use Greenter\Ubl\UblValidator;
 use PHPUnit\Framework\TestCase;
 
 class InvoiceTest extends TestCase
 {
-    public function testInvoiceIsGenerated()
-    {
+    private $invoice;
+
+    public function setUp(){
         $xmlService = new \Sabre\Xml\Service();
 
         $xmlService->namespaceMap = [
@@ -46,14 +48,18 @@ class InvoiceTest extends TestCase
                 ->setTaxCategory((new \CleverIt\UBL\Invoice\TaxCategory())
                     ->setId("H")
                     ->setName("NL, Hoog Tarief")
-                    ->setPercent(21.00)))
+                    ->setPercent(21.00)
+                    ->setTaxScheme((new \CleverIt\UBL\Invoice\TaxScheme())
+                        ->setId('VAT'))))
             ->addTaxSubTotal((new \CleverIt\UBL\Invoice\TaxSubTotal())
                 ->setTaxAmount(9)
                 ->setTaxableAmount(100)
                 ->setTaxCategory((new \CleverIt\UBL\Invoice\TaxCategory())
                     ->setId("X")
                     ->setName("NL, Laag Tarief")
-                    ->setPercent(9.00)));
+                    ->setPercent(9.00)
+                    ->setTaxScheme((new \CleverIt\UBL\Invoice\TaxScheme())
+                        ->setId('VAT'))));
 
         $invoiceLine = (new \CleverIt\UBL\Invoice\InvoiceLine())
             ->setId(1)
@@ -71,8 +77,18 @@ class InvoiceTest extends TestCase
             ->setAllowanceTotalAmount(50));
 
 
-        $invoiceXml = \CleverIt\UBL\Invoice\Generator::invoice($invoice, 'EUR');
+        $this->invoice = \CleverIt\UBL\Invoice\Generator::invoice($invoice, 'EUR');
+    }
 
-        $this->assertXmlStringEqualsXmlFile(__DIR__ . "/ubl.xml", $invoiceXml);
+    public function testInvoiceIsGenerated()
+    {
+
+        $this->assertXmlStringEqualsXmlFile(__DIR__ . "/ubl.xml", $this->invoice);
+    }
+
+    public function testValidateSchema(){
+        $validator = new UblValidator();
+        $validator->isValid($this->invoice);
+        $this->assertTrue($validator->isValid($this->invoice));
     }
 }
