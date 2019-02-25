@@ -83,9 +83,11 @@ class Party implements XmlSerializable{
 
 	/**
 	 * @param string $companyId
+	 * @return Party
 	 */
 	public function setCompanyId($companyId) {
     	$this->companyId = $companyId;
+        return $this;
 	}
 
 	/**
@@ -98,9 +100,11 @@ class Party implements XmlSerializable{
 
 	/**
 	 * @param TaxScheme $taxScheme
+	 * @return Party
 	 */
     public function setTaxScheme($taxScheme) {
     	$this->taxScheme = $taxScheme;
+        return $this;
     }
 
 	/**
