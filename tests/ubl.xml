@@ -7,6 +7,8 @@
     <cbc:ID>CIT1234</cbc:ID>
     <cbc:CopyIndicator>false</cbc:CopyIndicator>
     <cbc:IssueDate>1994-12-12</cbc:IssueDate>
+    <cbc:DueDate>1994-12-26</cbc:DueDate>
+    <cbc:DocumentCurrencyCode>EUR</cbc:DocumentCurrencyCode>
     <cbc:InvoiceTypeCode>SalesInvoice</cbc:InvoiceTypeCode>
     <cac:AccountingSupplierParty>
         <cac:Party>
@@ -70,6 +72,7 @@
             </cac:Contact>
         </cac:Party>
     </cac:AccountingCustomerParty>
+    <cac:OrderReference>12345</cac:OrderReference>
     <cac:TaxTotal>
         <cbc:TaxAmount currencyID="EUR">30.00</cbc:TaxAmount>
         <cac:TaxSubtotal>

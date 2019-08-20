@@ -2,6 +2,7 @@
 
 namespace CleverIt\UBL\Invoice\Tests;
 
+use DateInterval;
 use Greenter\Ubl\UblValidator;
 use PHPUnit\Framework\TestCase;
 
@@ -22,7 +23,10 @@ class InvoiceTest extends TestCase
         $date = \DateTime::createFromFormat('d-m-Y', '12-12-1994');
         $invoice->setId('CIT1234');
         $invoice->setIssueDate($date);
+        $invoice->setDueDate($date->add(new DateInterval("P14D")));
         $invoice->setInvoiceTypeCode("SalesInvoice");
+        $invoice->setOrderReference('12345');
+        $invoice->setDocumentCurrencyCode("EUR");
 
         $accountingSupplierParty = new \CleverIt\UBL\Invoice\Party();
         $accountingSupplierParty->setName('CleverIt');

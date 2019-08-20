@@ -12,7 +12,7 @@ namespace CleverIt\UBL\Invoice;
 use Sabre\Xml\Writer;
 use Sabre\Xml\XmlSerializable;
 
-class Country implements  XmlSerializable {
+class Country implements XmlSerializable {
     private $identificationCode;
 
     /**
@@ -31,8 +31,6 @@ class Country implements  XmlSerializable {
         return $this;
     }
 
-
-
     /**
      * The xmlSerialize method is called during xml writing.
      *
@@ -44,6 +42,5 @@ class Country implements  XmlSerializable {
             Schema::CBC.'IdentificationCode' => $this->identificationCode,
         ]);
     }
-
 
 }

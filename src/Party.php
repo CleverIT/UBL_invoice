@@ -69,7 +69,7 @@ class Party implements XmlSerializable{
      * @param Address $postalAddress
      * @return Party
      */
-    public function setPostalAddress($postalAddress) {
+    public function setPostalAddress(Address $postalAddress) {
         $this->postalAddress = $postalAddress;
         return $this;
     }
@@ -86,6 +86,7 @@ class Party implements XmlSerializable{
 	 */
 	public function setCompanyId($companyId) {
     	$this->companyId = $companyId;
+        return $this;
 	}
 
 	/**
@@ -101,6 +102,7 @@ class Party implements XmlSerializable{
 	 */
     public function setTaxScheme($taxScheme) {
     	$this->taxScheme = $taxScheme;
+    	return $this;
     }
 
 	/**
@@ -136,7 +138,7 @@ class Party implements XmlSerializable{
     }
 
     /**
-     * @return mixed
+     * @return Contact
      */
     public function getContact() {
         return $this->contact;
@@ -146,7 +148,7 @@ class Party implements XmlSerializable{
      * @param mixed $contact
      * @return Party
      */
-    public function setContact($contact) {
+    public function setContact(Contact $contact) {
         $this->contact = $contact;
         return $this;
     }
