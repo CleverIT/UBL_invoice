@@ -16,6 +16,7 @@ class InvoiceLine implements XmlSerializable {
     private $id;
     private $invoicedQuantity;
     private $lineExtensionAmount;
+    private $documentReference;
     private $unitCode = 'MON';
     /**
      * @var TaxTotal
@@ -148,7 +149,8 @@ class InvoiceLine implements XmlSerializable {
      * @param Writer $writer
      * @return void
      */
-    function xmlSerialize(Writer $writer) {
+    function xmlSerialize(Writer $writer)
+    {
         $writer->write([
             Schema::CBC . 'ID' => $this->id,
             [
@@ -164,10 +166,22 @@ class InvoiceLine implements XmlSerializable {
                 'attributes' => [
                     'currencyID' => Generator::$currencyID
                 ]
-            ],
-            Schema::CAC . 'TaxTotal' => $this->taxTotal,
+            ]
+        ]);
+
+        if ($this->documentReference) {
+            $writer->write([
+                Schema::CAC . 'DocumentReference' => [
+                    Schema::CBC . 'ID' => $this->documentReference
+                ],
+            ]);
+        }
+
+        $writer->write([
             Schema::CAC . 'Item' => $this->item,
         ]);
+
+
 
         if ($this->price !== null) {
             $writer->write(
@@ -176,5 +190,12 @@ class InvoiceLine implements XmlSerializable {
                 ]
             );
         }
+    }
+
+    public function setDocumentReference($documentReference): self
+    {
+        $this->documentReference = $documentReference;
+
+        return $this;
     }
 }
