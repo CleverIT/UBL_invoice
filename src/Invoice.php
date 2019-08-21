@@ -64,7 +64,6 @@ class Invoice implements XmlSerializable {
 
     private $orderReference;
 
-
     function validate()
     {
         if ($this->id === null) {
@@ -96,7 +95,7 @@ class Invoice implements XmlSerializable {
         }
 
         if ($this->legalMonetaryTotal === null) {
-//            throw new \InvalidArgumentException('Missing invoice LegalMonetaryTotal');
+            throw new \InvalidArgumentException('Missing invoice LegalMonetaryTotal');
         }
     }
 
@@ -111,17 +110,24 @@ class Invoice implements XmlSerializable {
             Schema::CBC . 'CopyIndicator' => $this->copyIndicator ? 'true' : 'false',
             Schema::CBC . 'IssueDate' => $this->issueDate->format('Y-m-d'),
             Schema::CBC . 'DueDate' => $this->dueDate->format('Y-m-d'),
-            Schema::CBC . 'DocumentCurrencyCode' => $this->documentCurrencyCode,
             Schema::CBC . 'InvoiceTypeCode' => $this->invoiceTypeCode,
-            Schema::CAC . 'AccountingSupplierParty' => [Schema::CAC . "Party" => $this->accountingSupplierParty],
-            Schema::CAC . 'AccountingCustomerParty' => [Schema::CAC . "Party" => $this->accountingCustomerParty],
+            Schema::CBC . 'DocumentCurrencyCode' => $this->documentCurrencyCode
         ]);
 
         if ($this->orderReference) {
             $writer->write([
-                Schema::CAC . 'OrderReference' => $this->orderReference
+                Schema::CAC . 'OrderReference' => [
+                    Schema::CBC . 'ID' => $this->orderReference
+                ]
             ]);
         }
+
+        $writer->write([
+            Schema::CAC . 'AccountingSupplierParty' => [Schema::CAC . "Party" => $this->accountingSupplierParty],
+            Schema::CAC . 'AccountingCustomerParty' => [Schema::CAC . "Party" => $this->accountingCustomerParty],
+        ]);
+
+
         if($this->additionalDocumentReference!= null){
             $writer->write([
                 Schema::CAC . 'AdditionalDocumentReference' => $this->additionalDocumentReference,

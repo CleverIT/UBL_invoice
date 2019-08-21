@@ -7,26 +7,9 @@ use Sabre\Xml\XmlSerializable;
 class Contact implements XmlSerializable{
     private $name;
     private $telephone;
+    private $telefax;
+    private $electronicMail;
 
-    function xmlSerialize(Writer $writer) {
-        $writer->write([
-            Schema::CBC.'Name' => $this->name,
-            Schema::CBC.'Telephone' => $this->telephone
-        ]);
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getName()
-    {
-        return $this->name;
-    }
-
-    /**
-     * @param mixed $name
-     * @return self
-     */
     public function setName($name): self
     {
         $this->name = $name;
@@ -34,22 +17,33 @@ class Contact implements XmlSerializable{
         return $this;
     }
 
-    /**
-     * @return mixed
-     */
-    public function getTelephone()
-    {
-        return $this->telephone;
-    }
-
-    /**
-     * @param mixed $telephone
-     * @return self
-     */
     public function setTelephone($telephone): self
     {
         $this->telephone = $telephone;
 
         return $this;
+    }
+
+    public function setTelefax($telefax): self
+    {
+        $this->telefax = $telefax;
+
+        return $this;
+    }
+
+    public function setElectronicMail($electronicMail): self
+    {
+        $this->electronicMail = $electronicMail;
+
+        return $this;
+    }
+
+    function xmlSerialize(Writer $writer) {
+        $writer->write([
+            Schema::CBC.'Name' => $this->name,
+            Schema::CBC.'Telephone' => $this->telephone,
+            Schema::CBC.'Telefax' => $this->telefax,
+            Schema::CBC.'ElectronicMail' => $this->electronicMail,
+        ]);
     }
 }
