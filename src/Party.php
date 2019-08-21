@@ -42,112 +42,36 @@ class Party implements XmlSerializable{
 	 */
     private $legalEntity;
 
-    /**
-     * @return mixed
-     */
-    public function getName() {
-        return $this->name;
-    }
-
-    /**
-     * @param mixed $name
-     * @return Party
-     */
     public function setName($name) {
         $this->name = $name;
         return $this;
     }
 
-    /**
-     * @return Address
-     */
-    public function getPostalAddress() {
-        return $this->postalAddress;
-    }
-
-    /**
-     * @param Address $postalAddress
-     * @return Party
-     */
     public function setPostalAddress(Address $postalAddress) {
         $this->postalAddress = $postalAddress;
         return $this;
     }
 
-	/**
-	 * @return string
-	 */
-    public function getCompanyId() {
-    	return $this->companyId;
-    }
-
-	/**
-	 * @param string $companyId
-	 */
 	public function setCompanyId($companyId) {
     	$this->companyId = $companyId;
         return $this;
 	}
 
-	/**
-	 * @param TaxScheme $taxScheme.
-	 * @return mixed
-	 */
-    public function getTaxScheme() {
-    	return $this->taxScheme;
-    }
-
-	/**
-	 * @param TaxScheme $taxScheme
-	 */
     public function setTaxScheme($taxScheme) {
     	$this->taxScheme = $taxScheme;
     	return $this;
     }
 
-	/**
-	 * @return LegalEntity
-	 */
-    public function getLegalEntity() {
-    	return $this->legalEntity;
-    }
-
-	/**
-	 * @param $legalEntity
-	 * @return Party
-	 */
     public function setLegalEntity($legalEntity) {
     	$this->legalEntity = $legalEntity;
     	return $this;
     }
 
-    /**
-     * @return Address
-     */
-    public function getPhysicalLocation() {
-        return $this->physicalLocation;
-    }
-
-    /**
-     * @param Address $physicalLocation
-     * @return Party
-     */
     public function setPhysicalLocation($physicalLocation) {
         $this->physicalLocation = $physicalLocation;
         return $this;
     }
 
-    /**
-     * @return Contact
-     */
-    public function getContact() {
-        return $this->contact;
-    }
-
-    /**
-     * @param mixed $contact
-     * @return Party
-     */
     public function setContact(Contact $contact) {
         $this->contact = $contact;
         return $this;
