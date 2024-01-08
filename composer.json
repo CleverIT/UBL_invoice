@@ -16,7 +16,7 @@
     ],
 
     "require": {
-        "sabre/xml": "^1.5"
+        "sabre/xml": "^2.0"
     },
 
     "autoload": {
